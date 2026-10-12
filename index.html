@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basmala | Portfolio</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+            <button id="theme-toggle" type="button" aria-label="Switch to light mode">☾</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+    <div class="home-content">
+        <h1>Hi, I'm Basmala</h1>
+        <h2>Aspiring Cybersecurity Specialist</h2>
+
+        <p>
+            I'm a student with a strong interest in technology,
+            Linux, and cybersecurity.
+        </p>
+        <p>Currently learning Linux and cybersecurity fundamentals.</p>
+
+        <a class="button" href="#contact">Contact Me</a>
+    </div>
+
+   <div class="home-photo-wrap">
+    <img
+        src="profile.jpg"
+        alt="Portrait of Basmala"
+        class="profile-photo">
+
+    <span class="tech-badge badge-cyber">Cybersecurity</span>
+    <span class="tech-badge badge-network">Networking</span>
+    <span class="tech-badge badge-linux">Linux</span>
+</div>
+</section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I'm a student at Delta Higher Institute for Management
+                and Accounting Information Systems. I'm interested in
+                IT, Linux, and cybersecurity, and I'm continually
+                developing my knowledge and skills in these areas.
+                My future goal is to work at Dark Entry, Ibrahim
+                Hegazy's company, and build a career in cybersecurity.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>My Skills</h2>
+            <div class="skills-list">
+                <span>HTML</span>
+                <span>CSS</span>
+                <span>Computer Fundamentals</span>
+                <span>Linux (Learning)</span>
+                <span>Cybersecurity (Learning)</span>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects I'm Planning</h2>
+            <p>These are ideas for projects I plan to build while learning.</p>
+
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="project-card h-100">
+                        <h3>Personal Portfolio</h3>
+                        <p>
+                            A planned personal website to introduce myself
+                            and my career interests.
+                        </p>
+                        <span class="project-tag">Planned</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="project-card h-100">
+                        <h3>Linux Learning Lab</h3>
+                        <p>
+                            A future project to practice Linux commands
+                            and basic system administration.
+                        </p>
+                        <span class="project-tag">Planned</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="project-card h-100">
+                        <h3>Cybersecurity Notes</h3>
+                        <p>
+                            A planned collection of notes about networking
+                            and cybersecurity fundamentals.
+                        </p>
+                        <span class="project-tag">Planned</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    <section id="contact">
+    <h2>Contact</h2>
+
+    <div class="contact-links">
+        <a class="contact-item" href="mailto:basmala.ahmed.1922@gmail.com">
+            <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+            <span>basmala.ahmed.1922@gmail.com</span>
+
+        <a 
+        
+        class="contact-item"
+   href="https://wa.me/201228656941"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Chat with me on WhatsApp">
+    <i class="bi bi-whatsapp" aria-hidden="true"></i>
+    <span>WhatsApp</span>
+</a>
+
+        <a class="contact-item"
+           href="https://github.com/basmalaahmed1922-lang"
+           target="_blank"
+           rel="noopener noreferrer">
+            <i class="bi bi-github" aria-hidden="true"></i>
+            <span>basmalaahmed1922-lang</span>
+        </a>
+    </div>
+</section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Basmala</p>
+    </footer>
+
+    <script>
+        const themeButton = document.getElementById("theme-toggle");
+        const savedTheme = localStorage.getItem("portfolio-theme");
+
+        function updateThemeButton() {
+            const isLightMode = document.body.classList.contains("light-mode");
+
+            themeButton.textContent = isLightMode ? "☀" : "☾";
+            themeButton.setAttribute(
+                "aria-label",
+                isLightMode ? "Switch to night mode" : "Switch to light mode"
+            );
+        }
+
+        if (savedTheme === "light") {
+            document.body.classList.add("light-mode");
+        }
+
+        updateThemeButton();
+
+        themeButton.addEventListener("click", function () {
+            document.body.classList.toggle("light-mode");
+
+            const isLightMode = document.body.classList.contains("light-mode");
+            localStorage.setItem("portfolio-theme", isLightMode ? "light" : "night");
+
+            updateThemeButton();
+        });
+    </script>
+</body>
+<script>
+    const revealItems = document.querySelectorAll(
+        "#about, #skills, #projects, #contact, .skills-list span, .project-card"
+    );
+
+    if ("IntersectionObserver" in window) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+
+        revealItems.forEach((item, index) => {
+            item.classList.add("reveal");
+            item.style.setProperty(
+                "--reveal-delay",
+                `${(index % 3) * 100}ms`
+            );
+            revealObserver.observe(item);
+        });
+    }
+</script>
+</html>

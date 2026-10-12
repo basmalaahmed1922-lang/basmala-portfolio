@@ -1,0 +1,686 @@
+:root {
+    --page-bg: #0a0a0a;
+    --surface: #141414;
+    --card-bg: #1b1b1b;
+    --border: #3d3420;
+    --text: #f5f1e8;
+    --muted: #c5beb0;
+    --accent: #d4af37;
+    --accent-hover: #f0cf62;
+    --button-text: #111111;
+}
+
+body.light-mode {
+    --page-bg: #f5f2eb;
+    --surface: #eae5d9;
+    --card-bg: #fbf9f4;
+    --border: #d8d0bf;
+    --text: #26241f;
+    --muted: #514d44;
+    --accent: #765d20;
+    --accent-hover: #5e4919;
+    --button-text: #ffffff;
+
+    background-image: linear-gradient(135deg, #f7f5ef 0%, #efebe1 100%);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--page-bg);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.7;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* شبكة تقنية خفيفة في الخلفية */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.12;
+    background-image:
+        linear-gradient(rgba(212, 175, 55, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212, 175, 55, 0.12) 1px, transparent 1px);
+    background-size: 42px 42px;
+    animation: network-grid 18s linear infinite;
+}
+
+@keyframes network-grid {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 42px 42px;
+    }
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    padding: 18px 20px;
+    background-color: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+nav a {
+    position: relative;
+    color: var(--text);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+nav a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.45);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: width 0.25s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 80px 25px;
+    text-align: center;
+    scroll-margin-top: 75px;
+}
+
+#home {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 50px;
+    min-height: 75vh;
+    text-align: left;
+}
+
+/* وهج متحرك خلف البداية */
+#home::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 300px;
+    height: 300px;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(212, 175, 55, 0.16) 0%,
+        rgba(212, 175, 55, 0.06) 45%,
+        transparent 72%
+    );
+    animation: glow-breathe 4s ease-in-out infinite alternate;
+}
+
+@keyframes glow-breathe {
+    from {
+        opacity: 0.45;
+        scale: 0.8;
+    }
+    to {
+        opacity: 1;
+        scale: 1.25;
+    }
+}
+
+.home-content {
+    position: relative;
+    z-index: 1;
+}
+
+.home-content p {
+    margin-left: 0;
+}
+
+h1,
+h2 {
+    color: var(--accent);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+}
+
+h1 {
+    margin-bottom: 12px;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+}
+
+h2 {
+    margin-bottom: 25px;
+    font-size: 2rem;
+}
+
+h3 {
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+}
+
+h1,
+h2,
+h3 {
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+h1:hover,
+h2:hover,
+h3:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.55);
+}
+
+p {
+    max-width: 700px;
+    margin: 0 auto 18px;
+    color: var(--muted);
+}
+
+#home p,
+#about p {
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+#home p:hover,
+#about p:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.55);
+}
+
+.button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    background-color: var(--accent);
+    color: var(--button-text);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    background-color: var(--accent-hover);
+}
+
+#home .button {
+    animation: button-pulse 2s ease-in-out infinite;
+}
+
+@keyframes button-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.35);
+    }
+    50% {
+        box-shadow: 0 0 0 9px rgba(212, 175, 55, 0);
+    }
+}
+
+/* الصورة الشخصية */
+.home-photo-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    width: min(100%, 360px);
+    height: 440px;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    border-radius: 180px 180px 28px 28px;
+    box-shadow: 0 15px 45px rgba(212, 175, 55, 0.2);
+    animation: portrait-float 4s ease-in-out infinite;
+}
+
+@keyframes portrait-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-14px);
+    }
+}
+
+/* شارات Cybersecurity وNetworking وLinux */
+.tech-badge {
+    position: absolute;
+    z-index: 2;
+    padding: 8px 13px;
+    border: 1px solid var(--accent);
+    border-radius: 20px;
+    background-color: var(--surface);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: bold;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.25);
+    animation: badge-float 3s ease-in-out infinite;
+}
+
+.badge-cyber {
+    top: 18%;
+    left: -30px;
+}
+
+.badge-network {
+    top: 48%;
+    right: -38px;
+    animation-delay: 0.7s;
+}
+
+.badge-linux {
+    bottom: 14%;
+    left: -18px;
+    animation-delay: 1.3s;
+}
+
+@keyframes badge-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+/* المهارات */
+.skills-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.skills-list span {
+    position: relative;
+    overflow: hidden;
+    padding: 12px 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    color: var(--text);
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.3s ease;
+}
+
+.skills-list span:hover {
+    transform: translateY(-7px) scale(1.06);
+    border-color: var(--accent);
+    color: var(--accent-hover);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.55);
+    box-shadow: 0 8px 22px rgba(212, 175, 55, 0.2);
+}
+
+/* كروت المشاريع */
+.project-card {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background-color: var(--card-bg);
+    text-align: left;
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background-color 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-9px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 12px 28px rgba(212, 175, 55, 0.18);
+}
+
+.project-tag {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background-color: var(--surface);
+    color: var(--accent);
+    font-size: 13px;
+}
+
+/* لمعة تمر على الكروت والمهارات وروابط التواصل */
+.project-card::after,
+.skills-list span::after,
+.contact-item::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(212, 175, 55, 0.12),
+        transparent
+    );
+    transition: left 0.6s ease;
+}
+
+.project-card:hover::after,
+.skills-list span:hover::after,
+.contact-item:hover::after {
+    left: 140%;
+}
+
+/* روابط التواصل */
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.contact-item {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: min(100%, 420px);
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    color: var(--text);
+    text-align: left;
+    text-decoration: none;
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.3s ease;
+}
+
+.contact-item i {
+    color: var(--accent);
+    font-size: 21px;
+}
+
+.contact-item:hover {
+    transform: translateY(-5px) scale(1.02);
+    border-color: var(--accent);
+    color: var(--text);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+}
+
+.contact-item span {
+    overflow-wrap: anywhere;
+}
+
+/* زر الهلال والشمس */
+#theme-toggle {
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background-color: var(--card-bg);
+    color: var(--accent);
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        transform 0.25s ease,
+        background-color 0.3s ease;
+}
+
+#theme-toggle:hover {
+    transform: rotate(-15deg) scale(1.08);
+    border-color: var(--accent);
+}
+
+footer {
+    padding: 25px;
+    border-top: 1px solid var(--border);
+    background-color: var(--surface);
+    text-align: center;
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+/* تحسينات الوضع النهاري */
+body.light-mode header,
+body.light-mode footer {
+    box-shadow: 0 4px 18px rgba(39, 34, 22, 0.06);
+}
+
+body.light-mode .project-card,
+body.light-mode .skills-list span,
+body.light-mode .contact-item {
+    box-shadow: 0 8px 24px rgba(39, 34, 22, 0.06);
+}
+
+body.light-mode .project-card:hover,
+body.light-mode .skills-list span:hover,
+body.light-mode .contact-item:hover {
+    box-shadow: 0 12px 28px rgba(118, 93, 32, 0.14);
+}
+
+body.light-mode .project-tag {
+    background-color: #eee8d9;
+    color: #665019;
+    border-color: var(--border);
+}
+
+body.light-mode::before {
+    opacity: 0.05;
+}
+
+/* ظهور العناصر أثناء النزول في الصفحة */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+        opacity 0.65s ease,
+        transform 0.65s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* حركة دخول عناصر Home */
+#home h1,
+#home h2,
+#home p,
+#home .button {
+    animation: fade-up 0.7s ease both;
+}
+
+#home h2 {
+    animation-delay: 0.1s;
+}
+
+#home p:nth-of-type(1) {
+    animation-delay: 0.2s;
+}
+
+#home p:nth-of-type(2) {
+    animation-delay: 0.3s;
+}
+
+#home .button {
+    animation-delay: 0.4s, 0s;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* الوضع على الشاشات الصغيرة */
+@media (max-width: 700px) {
+    #home {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 50px;
+        text-align: center;
+    }
+
+    .home-content p {
+        margin-left: auto;
+    }
+
+    .profile-photo {
+        width: min(80vw, 320px);
+        height: 380px;
+    }
+
+    .badge-cyber {
+        left: 0;
+    }
+
+    .badge-network {
+        right: 0;
+    }
+
+    .badge-linux {
+        left: 5px;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        gap: 12px 18px;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    section {
+        padding: 55px 20px;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
+}
+
+/* احترام إعداد تقليل الحركة في الجهاز */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+/* تقوية الحركات واللمعات في الوضع النهاري */
+body.light-mode::before {
+    opacity: 0.14;
+}
+
+body.light-mode #home::before {
+    background: radial-gradient(
+        circle,
+        rgba(151, 112, 12, 0.24) 0%,
+        rgba(151, 112, 12, 0.1) 48%,
+        transparent 72%
+    );
+}
+
+body.light-mode h1:hover,
+body.light-mode h2:hover,
+body.light-mode h3:hover {
+    text-shadow: 0 0 14px rgba(118, 93, 32, 0.65);
+}
+
+body.light-mode #home p:hover,
+body.light-mode #about p:hover {
+    text-shadow: 0 0 10px rgba(118, 93, 32, 0.45);
+}
+
+body.light-mode .skills-list span:hover,
+body.light-mode .project-card:hover,
+body.light-mode .contact-item:hover {
+    box-shadow: 0 12px 30px rgba(118, 93, 32, 0.25);
+}
+
+body.light-mode .project-card::after,
+body.light-mode .skills-list span::after,
+body.light-mode .contact-item::after {
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(151, 112, 12, 0.24),
+        transparent
+    );
+}
